@@ -10,12 +10,14 @@ const client = axios.create({
   }
 });
 
+
 // Request interceptor - Add access token to every request
 client.interceptors.request.use((config) => {
   const token = localStorage.getItem('accessToken');
   if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+    config.headers.authorization = `Bearer ${token}`;
   }
+  // console.log("Request config:", config)
   return config;
 });
 
@@ -29,9 +31,11 @@ client.interceptors.response.use(
       originalRequest._retry = true;
 
       try {
+
         const refreshToken = localStorage.getItem('refreshToken');
+        // console.log("Attempting token refresh with refresh token:", refreshToken);
         if (!refreshToken) {
-          throw new Error('No refresh token');
+          throw new Error(response.data?.message || "No refresh token available");
         }
 
         const response = await axios.get(`${API_URL}/refresh-token`, {
@@ -44,6 +48,7 @@ client.interceptors.response.use(
         localStorage.setItem('refreshToken', newRefreshToken);
 
         originalRequest.headers.Authorization = `Bearer ${accessToken}`;
+        // console.log(client(originalRequest));
         return client(originalRequest);
       } catch (refreshError) {
         localStorage.removeItem('accessToken');

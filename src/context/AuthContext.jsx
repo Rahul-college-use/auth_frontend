@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }) => {
     const checkAuth = async () => {
       try {
         const token = localStorage.getItem("accessToken");
+        // console.log("Checking auth with token:", token);
 
         if (!token) {
           setUser(null);
@@ -21,6 +22,7 @@ export const AuthProvider = ({ children }) => {
         }
 
         const res = await authService.getCurrentUser();
+        // console.log("Auth check response:", res.user);
 
         // Backend /get-me doesn't return verified, so default to true
         if (res.user) {
@@ -28,6 +30,7 @@ export const AuthProvider = ({ children }) => {
         }
 
         setUser(res.user || null);
+        // console.log("User set to:", res.user);
       } catch (err) {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
@@ -63,11 +66,12 @@ export const AuthProvider = ({ children }) => {
     try {
       const res = await authService.login(email, password);
 
-      // backend: { message, user, accessToken }
+
       if (res?.accessToken) {
         localStorage.setItem("accessToken", res.accessToken);
       }
 
+      
       if (res?.user) {
         setUser(res.user);
 
@@ -174,6 +178,7 @@ export const AuthProvider = ({ children }) => {
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
+  // console.log("useAuth context:", context);
 
   if (!context) {
     throw new Error("useAuth must be used within AuthProvider");

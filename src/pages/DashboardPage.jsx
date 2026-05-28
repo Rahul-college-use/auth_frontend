@@ -105,6 +105,7 @@ export const DashboardPage = () => {
                   <p className="text-xs text-slate-400 uppercase tracking-wider font-semibold">User ID</p>
                 </div>
                 <p className="text-lg text-slate-100 font-mono break-all">{user?.id}</p>
+                {/* {console.log(user)} */}
               </div>
 
               <div className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 hover:border-blue-500/50 transition-all">
@@ -112,7 +113,7 @@ export const DashboardPage = () => {
                   <Calendar className="w-5 h-5 text-blue-400" />
                   <p className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Member Since</p>
                 </div>
-                <p className="text-lg text-slate-100">{new Date(user?.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                <p className="text-lg text-slate-100">{new Date(user?.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'UTC' })}</p>
               </div>
 
               <div className="bg-slate-800/30 rounded-2xl p-6 border border-slate-700/50 hover:border-cyan-500/50 transition-all">
@@ -120,7 +121,7 @@ export const DashboardPage = () => {
                   <Clock className="w-5 h-5 text-cyan-400" />
                   <p className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Last Updated</p>
                 </div>
-                <p className="text-lg text-slate-100">{new Date(user?.updatedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                <p className="text-lg text-slate-100">{new Date(user?.updatedAt).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZone: 'UTC' })}</p>
               </div>
             </div>
           </div>

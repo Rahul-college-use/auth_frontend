@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { Mail, Lock, Shield, ArrowRight, RefreshCw } from "lucide-react";
 
 export const LoginPage = () => {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [otp, setOtp] = useState("");
@@ -19,6 +20,10 @@ export const LoginPage = () => {
 
   const navigate = useNavigate();
 
+    if (localStorage.getItem("accessToken")) {
+    // console.log("Access token found on login page, redirecting to dashboard");
+    return navigate("/dashboard");
+  }
   useEffect(() => {
     let interval;
     if (cooldown > 0) {
@@ -51,6 +56,8 @@ export const LoginPage = () => {
       }
     } catch (err) {
       toast.error(err.message || "Login failed");
+      // console.error("Login error:", err);
+      
     } finally {
       setSubmitting(false);
     }

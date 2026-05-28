@@ -13,8 +13,13 @@ export const authService = {
 
   login: async (email, password) => {
     const response = await client.post("/login", { email, password });
+    // console.log(response);
+    // console.log(response.message);
+
+    // backend returns { message, user, accessToken }
 
     const { accessToken, user } = response.data;
+    console.log("Login response:", response);
 
     localStorage.setItem("accessToken", accessToken);
 
@@ -68,6 +73,7 @@ export const authService = {
     // backend returns ONLY accessToken
     localStorage.setItem("accessToken", response.data.accessToken);
 
+    // console.log(response);
     return response.data;
   },
 

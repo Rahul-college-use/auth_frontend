@@ -32,7 +32,7 @@ export default function App() {
           />
 
           {/* DEFAULT */}
-          <Route path="/" element={<Navigate to="/login" replace />} />
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
           {/* 404 */}
           <Route path="*" element={<Navigate to="/login" replace />} />
