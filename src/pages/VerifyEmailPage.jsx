@@ -44,9 +44,9 @@ export default function VerifyEmailPage() {
 
       toast.success(res.message || "Verified");
 
-      setTimeout(() => {
-        navigate("/login");
-      }, 100000);
+      // setTimeout(() => {
+      //   navigate("/login");
+      // }, 100000);
 
     } catch (err) {
       toast.error(err.message || "Verification failed");
