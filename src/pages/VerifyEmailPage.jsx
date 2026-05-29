@@ -46,7 +46,7 @@ export default function VerifyEmailPage() {
 
       setTimeout(() => {
         navigate("/login");
-      }, 800);
+      }, 100000);
 
     } catch (err) {
       toast.error(err.message || "Verification failed");
